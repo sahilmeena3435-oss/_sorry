@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Shreya… please read this 🥺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+/* ======================
+   THEME: Sunset Aurora
+   ====================== */
+:root{
+  --a: #ff6b9d;   /* pink */
+  --b: #c44dff;   /* purple */
+  --c: #ff9f43;   /* orange */
+  --d: #ffd32a;   /* yellow */
+  --e: #0abde3;   /* teal accent */
+  --card: rgba(255,255,255,0.10);
+  --card-border: rgba(255,180,220,0.4);
+  --txt: #fff;
+  --txt2: rgba(255,230,245,0.82);
+  --script: 'Pacifico', cursive;
+  --body: 'Nunito', sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{height:100%}
+
+body{
+  min-height:100%;
+  font-family:var(--body);
+  color:var(--txt);
+  background:#0a0015;
+  /* SCROLL FIX: body scrolls, fixed layers behind */
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+/* ---- fixed animated background ---- */
+#bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 100% 70% at 10% 20%, rgba(196,77,255,.55) 0%,transparent 65%),
+    radial-gradient(ellipse 80% 90% at 90% 80%, rgba(255,107,157,.5) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,159,67,.25) 0%,transparent 70%),
+    linear-gradient(180deg,#0a0015 0%,#12002a 60%,#0a001a 100%);
+  animation: bgPulse 8s ease-in-out infinite alternate;
+}
+@keyframes bgPulse{
+  0%{filter:hue-rotate(0deg) brightness(1)}
+  100%{filter:hue-rotate(25deg) brightness(1.12)}
+}
+
+/* ---- aurora wave ---- */
+#aurora{
+  position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+}
+.wave{
+  position:absolute;border-radius:50%;
+  mix-blend-mode:screen;opacity:.25;
+  animation:waveFloat linear infinite;
+}
+.w1{width:900px;height:300px;top:5%;left:-20%;
+    background:radial-gradient(ellipse,#ff6b9d,transparent 70%);
+    animation-duration:18s;}
+.w2{width:700px;height:250px;top:25%;left:30%;
+    background:radial-gradient(ellipse,#c44dff,transparent 70%);
+    animation-duration:14s;animation-delay:-6s;}
+.w3{width:800px;height:200px;top:60%;left:10%;
+    background:radial-gradient(ellipse,#ff9f43,transparent 70%);
+    animation-duration:22s;animation-delay:-3s;}
+.w4{width:600px;height:220px;top:75%;left:55%;
+    background:radial-gradient(ellipse,#0abde3,transparent 70%);
+    animation-duration:16s;animation-delay:-10s;}
+@keyframes waveFloat{
+  0%{transform:translateX(0) scaleY(1)}
+  50%{transform:translateX(80px) scaleY(1.15)}
+  100%{transform:translateX(0) scaleY(1)}
+}
+
+/* ---- canvas (particles + floating hearts) ---- */
+#canvas{position:fixed;inset:0;z-index:2;pointer-events:none}
+
+/* =============================================
+   PAGE SECTIONS — full-screen slides
+   ============================================= */
+.page{
+  position:relative;z-index:10;
+  min-height:100vh;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px 16px;
+}
+
+/* =============================================
+   GLASS CARD
+   ============================================= */
+.card{
+  position:relative;
+  width:min(500px,94vw);
+  padding:44px 36px 36px;
+  border-radius:28px;
+  background:var(--card);
+  backdrop-filter:blur(28px) saturate(1.5);
+  -webkit-backdrop-filter:blur(28px) saturate(1.5);
+  border:1px solid var(--card-border);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.05) inset,
+    0 12px 60px rgba(196,77,255,.22),
+    0 4px 16px rgba(0,0,0,.45);
+  text-align:center;
+  transform-style:preserve-3d;
+  will-change:transform;
+  overflow:hidden;
+}
+
+/* rainbow shimmer top edge */
+.card::after{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--a),var(--b),var(--c),var(--d),var(--a));
+  background-size:300% 100%;
+  animation:rainbowSlide 4s linear infinite;
+  border-radius:28px 28px 0 0;
+}
+@keyframes rainbowSlide{
+  0%{background-position:0% 0%}100%{background-position:300% 0%}
+}
+
+/* glow border */
+.card::before{
+  content:'';position:absolute;inset:-1px;border-radius:29px;
+  background:linear-gradient(135deg,rgba(255,107,157,.5),rgba(196,77,255,.3),rgba(255,159,67,.4));
+  background-size:200%;
+  animation:borderGlow 5s ease infinite;
+  z-index:-1;filter:blur(3px);
+}
+@keyframes borderGlow{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+
+/* =============================================
+   PAGE 1 — APOLOGY
+   ============================================= */
+#page1{animation:fadeIn .6s ease both}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.emoji-row{font-size:2rem;margin-bottom:12px;animation:bounce 1.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.card-title{
+  font-family:var(--script);
+  font-size:clamp(36px,9vw,54px);
+  line-height:1.1;
+  background:linear-gradient(135deg,#ffd32a,#ff6b9d,#c44dff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:18px;
+  animation:titleGlow 3s ease-in-out infinite alternate;
+}
+@keyframes titleGlow{
+  from{filter:drop-shadow(0 0 8px rgba(255,107,157,.6))}
+  to{filter:drop-shadow(0 0 18px rgba(196,77,255,.8))}
+}
+
+.msg{
+  font-size:15px;font-weight:400;line-height:1.9;
+  color:var(--txt2);margin-bottom:28px;
+}
+.msg .pop{
+  font-weight:700;font-size:1.1em;
+  background:linear-gradient(90deg,var(--a),var(--c));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+/* ---- buttons ---- */
+.btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+.btn-yes{
+  padding:14px 32px;border-radius:50px;border:none;cursor:pointer;
+  font-family:var(--body);font-size:14px;font-weight:700;
+  background:linear-gradient(135deg,var(--a),var(--b));
+  color:#fff;box-shadow:0 4px 22px rgba(196,77,255,.5);
+  transition:transform .18s,box-shadow .18s;
+  position:relative;overflow:hidden;
+}
+.btn-yes::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--b),var(--c));
+  opacity:0;transition:opacity .3s;
+}
+.btn-yes:hover::before{opacity:1}
+.btn-yes:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 30px rgba(196,77,255,.7)}
+.btn-yes span{position:relative;z-index:1}
+
+.btn-no{
+  padding:14px 32px;border-radius:50px;
+  border:1px solid rgba(255,255,255,.2);cursor:pointer;
+  font-family:var(--body);font-size:14px;font-weight:400;
+  background:rgba(255,255,255,.07);color:var(--txt2);
+}
+.btn-no.teleporting{transition:none!important}
+
+/* =============================================
+   PAGE 2 — FORGIVENESS / LOVE NOTE
+   ============================================= */
+#page2{display:none;opacity:0;transition:opacity .8s ease}
+#page2.show{display:flex;opacity:1}
+
+.heart-big{
+  font-size:clamp(60px,18vw,100px);
+  display:block;margin-bottom:20px;
+  animation:heartBeat .8s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 30px rgba(255,107,157,.9));
+}
+@keyframes heartBeat{from{transform:scale(1)}to{transform:scale(1.12)}}
+
+.love-title{
+  font-family:var(--script);
+  font-size:clamp(30px,7vw,44px);
+  background:linear-gradient(135deg,#ffd32a,#ff6b9d);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:16px;
+  display:block;
+}
+
+.love-msg{
+  font-size:15px;font-weight:400;line-height:1.9;
+  color:var(--txt2);margin-bottom:28px;
+}
+.love-msg strong{color:#fff;font-weight:700}
+
+/* surprise button */
+.btn-surprise{
+  padding:15px 36px;border-radius:50px;border:none;cursor:pointer;
+  font-family:var(--body);font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,#ffd32a,#ff6b9d,#c44dff);
+  background-size:200%;
+  color:#fff;
+  box-shadow:0 4px 24px rgba(255,107,157,.55);
+  animation:surprisePulse 2s ease-in-out infinite,gradShift 4s linear infinite;
+  transition:transform .2s;
+}
+@keyframes surprisePulse{
+  0%,100%{box-shadow:0 4px 24px rgba(255,107,157,.55)}
+  50%{box-shadow:0 6px 38px rgba(196,77,255,.75),0 0 0 8px rgba(255,107,157,.12)}
+}
+@keyframes gradShift{
+  0%{background-position:0%}100%{background-position:200%}
+}
+.btn-surprise:hover{transform:scale(1.06)}
+
+/* =============================================
+   CONFETTI / PETALS
+   ============================================= */
+.petal{
+  position:fixed;pointer-events:none;z-index:200;
+  border-radius:50% 0 50% 0;
+  animation:petalFall linear forwards;
+}
+@keyframes petalFall{
+  0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+  100%{transform:translateY(110vh) rotate(900deg);opacity:0}
+}
+
+.sparkle{
+  position:fixed;pointer-events:none;z-index:200;
+  font-size:1.4rem;
+  animation:sparkleUp ease-out forwards;
+}
+@keyframes sparkleUp{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  100%{transform:translateY(-120px) scale(.3);opacity:0}
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media(max-width:420px){
+  .card{padding:32px 20px 28px}
+  .btn-row{flex-direction:column;align-items:center}
+  .btn-yes,.btn-no,.btn-surprise{width:100%;max-width:260px}
+}
+</style>
+</head>
+<body>
+
+<!-- fixed visual layers -->
+<div id="bg"></div>
+<div id="aurora">
+  <div class="wave w1"></div>
+  <div class="wave w2"></div>
+  <div class="wave w3"></div>
+  <div class="wave w4"></div>
+</div>
+<canvas id="canvas"></canvas>
+
+<!-- ================================================
+     PAGE 1 : APOLOGY CARD
+     ================================================ -->
+<div class="page" id="page1">
+  <div class="card" id="apology-card">
+
+    <div class="emoji-row">🥺💔😬</div>
+
+    <!-- EDIT NAME / TITLE HERE -->
+    <div class="card-title">Okay Shreya… 😅</div>
+
+    <!-- EDIT FUNNY SHORT MESSAGE HERE -->
+    <p class="msg">
+      Look, I messed up. Badly.<br/><br/>
+      Like… <span class="pop">really</span> badly. 😬<br/><br/>
+      I could write you a 10-page essay explaining myself,
+      but honestly I'd probably mess that up too.<br/><br/>
+      So I'll keep it simple:<br/>
+      You're the best thing that ever happened to me 🌟<br/>
+      and I, apparently, am the worst thing that ever happened to <em>me</em>. 💀<br/><br/>
+      Please forgive this absolute idiot? 🙏
+    </p>
+
+    <div class="btn-row">
+      <button class="btn-yes" id="btn-forgive" onclick="showForgiveness()">
+        <span>Okay Fine, I Forgive You 🥰</span>
+      </button>
+      <button class="btn-no" id="btn-mad">Nope, Still Mad 😤</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================================================
+     PAGE 2 : FORGIVENESS + LOVE NOTE
+     ================================================ -->
+<div class="page" id="page2">
+  <div class="card" id="love-card">
+
+    <span class="heart-big">💖</span>
+
+    <!-- EDIT LOVE NOTE TITLE HERE -->
+    <span class="love-title">Yayyyy!! She said yes! 🎉</span>
+
+    <!-- EDIT LOVE NOTE MESSAGE HERE -->
+    <p class="love-msg">
+      Shreya, honestly? You forgiving me says everything
+      about <strong>how amazing you are</strong> — not me. 🌸<br/><br/>
+      You have this magic where even when I act like a complete fool,
+      you somehow still see the best in me.<br/><br/>
+      I promise to be someone <strong>actually worthy</strong>
+      of that beautiful heart of yours. 💕<br/><br/>
+      Now tap the button below…
+      there's a little <strong>surprise</strong> waiting 👇✨
+    </p>
+
+    <!-- SURPRISE BUTTON — redirects to WhatsApp -->
+    <!-- EDIT YOUR PHONE NUMBER in the JS below (search "WA_NUMBER") -->
+    <button class="btn-surprise" id="btn-surprise" onclick="goToWhatsApp()">
+      🎁 Tap for Your Surprise ✨
+    </button>
+
+  </div>
+</div>
+
+<script>
+/* =============================================
+   YOUR WHATSAPP NUMBER — edit here
+   Format: country code + number, no + or spaces
+   Example India: 918116217554
+   ============================================= */
+const WA_NUMBER = '918116217554'; // your number with India code
+
+/* =============================================
+   THE MESSAGE SHE WILL SEND YOU
+   Edit this text — it will be pre-filled in
+   her WhatsApp compose box ready to send!
+   ============================================= */
+const WA_MESSAGE =
+`Okay okay… I forgive you. 😤❤️
+
+But ONLY because you made that cute little page for me.
+
+Fine, you're kind of sweet. Don't let it get to your head. 😒😂
+
+But honestly… that page made me smile so much. 🥺
+And it made me realize something I've been feeling for a while now —
+
+I really really like you. Like, a lot. 💗
+More than I probably should admit. 😅
+
+So here it is — will you be mine? 🌸
+Not just today, not just when things are easy —
+but properly, officially, mine? 💍✨
+
+Because I think we'd be really good together. 🥰
+
+— Shreya 💌`;
+
+
+/* =============================================
+   CANVAS — particles + floating hearts
+   ============================================= */
+(function(){
+  const canvas = document.getElementById('canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+  const HEARTS  = ['❤️','🩷','💜','🧡','💛','✨','⭐','🌟'];
+  const COLORS  = ['#ff6b9d','#c44dff','#ff9f43','#ffd32a','#0abde3','#fff'];
+  const particles = [];
+
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function rand(a,b){return a+Math.random()*(b-a)}
+
+  // dot particles
+  for(let i=0;i<100;i++){
+    particles.push({
+      type:'dot',
+      x:rand(0,W),y:rand(0,H),
+      r:rand(.5,2.2),
+      dx:rand(-.15,.15),dy:rand(-.3,-.05),
+      alpha:rand(.15,.9),da:rand(-.002,.002),
+      color:COLORS[Math.floor(Math.random()*COLORS.length)]
+    });
+  }
+  // floating emoji hearts
+  for(let i=0;i<18;i++){
+    particles.push({
+      type:'emoji',
+      x:rand(0,W),y:rand(H*.2,H),
+      dy:rand(-.4,-.12),
+      alpha:rand(.3,.8),da:rand(-.0015,.0015),
+      size:rand(12,26),
+      char:HEARTS[Math.floor(Math.random()*HEARTS.length)],
+      angle:rand(-30,30),dAngle:rand(-.4,.4)
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      if(p.type==='dot'){
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha));
+        ctx.fill();
+        p.x+=p.dx;p.y+=p.dy;p.alpha+=p.da;
+        if(p.y<-4||p.alpha<=0){p.y=H+4;p.x=rand(0,W);p.alpha=.1}
+      } else {
+        ctx.save();
+        ctx.globalAlpha=Math.max(0,Math.min(1,p.alpha));
+        ctx.font=`${p.size}px serif`;
+        ctx.translate(p.x,p.y);
+        ctx.rotate(p.angle*Math.PI/180);
+        ctx.fillText(p.char,0,0);
+        ctx.restore();
+        p.y+=p.dy;p.alpha+=p.da;p.angle+=p.dAngle;
+        if(p.y<-30||p.alpha<=0){p.y=H+10;p.x=rand(0,W);p.alpha=.3}
+      }
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+/* =============================================
+   3D TILT on active card
+   ============================================= */
+(function(){
+  const MAX=10;
+  function tilt(card,cx,cy,mx,my){
+    const rx=((my-cy)/(window.innerHeight/2))*-MAX;
+    const ry=((mx-cx)/(window.innerWidth /2))* MAX;
+    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+  }
+  function reset(card){card.style.transform=''}
+
+  function attachTilt(card){
+    document.addEventListener('mousemove',e=>{
+      if(!card.offsetParent&&card.parentElement.style.display==='none')return;
+      const r=card.getBoundingClientRect();
+      tilt(card,r.left+r.width/2,r.top+r.height/2,e.clientX,e.clientY);
+    });
+    document.addEventListener('mouseleave',()=>reset(card));
+    document.addEventListener('touchmove',e=>{
+      const t=e.touches[0];
+      const r=card.getBoundingClientRect();
+      tilt(card,r.left+r.width/2,r.top+r.height/2,t.clientX,t.clientY);
+    },{passive:true});
+    document.addEventListener('touchend',()=>reset(card));
+  }
+  attachTilt(document.getElementById('apology-card'));
+  attachTilt(document.getElementById('love-card'));
+})();
+
+
+/* =============================================
+   RUNAWAY "STILL MAD" BUTTON
+   ============================================= */
+(function(){
+  const btn=document.getElementById('btn-mad');
+  const FLEE=120;
+  let fixed=false;
+
+  function fix(){
+    if(fixed)return;fixed=true;
+    const r=btn.getBoundingClientRect();
+    btn.style.cssText+=`;position:fixed;left:${r.left}px;top:${r.top}px;z-index:9999;margin:0`;
+  }
+  function jump(){
+    btn.classList.add('teleporting');
+    const m=70,mW=window.innerWidth-btn.offsetWidth-m,mH=window.innerHeight-btn.offsetHeight-m;
+    btn.style.left=m+Math.random()*mW+'px';
+    btn.style.top =m+Math.random()*mH+'px';
+    requestAnimationFrame(()=>btn.classList.remove('teleporting'));
+  }
+  document.addEventListener('mousemove',e=>{
+    fix();
+    const r=btn.getBoundingClientRect();
+    if(Math.hypot(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2)<FLEE)jump();
+  });
+  document.addEventListener('touchstart',e=>{
+    fix();
+    const t=e.touches[0],r=btn.getBoundingClientRect();
+    if(Math.hypot(t.clientX-r.left-r.width/2,t.clientY-r.top-r.height/2)<FLEE+40)jump();
+  },{passive:true});
+})();
+
+
+/* =============================================
+   CONFETTI BURST
+   ============================================= */
+function burst(){
+  const COLORS=['#ff6b9d','#c44dff','#ff9f43','#ffd32a','#0abde3','#fff','#ff4757'];
+  const EMOJIS=['❤️','💜','🧡','💛','✨','🌸','💖'];
+  for(let i=0;i<90;i++){
+    const el=document.createElement('div');
+    el.className='petal';
+    const c=COLORS[Math.floor(Math.random()*COLORS.length)];
+    const sz=5+Math.random()*12;
+    const dur=2.2+Math.random()*3;
+    const del=Math.random()*1.2;
+    el.style.cssText=`left:${Math.random()*100}vw;top:-30px;width:${sz}px;height:${sz*1.3}px;background:${c};animation-duration:${dur}s;animation-delay:${del}s;opacity:${.5+Math.random()*.5}`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(dur+del+.5)*1000);
+  }
+  // emoji sparkles from center
+  for(let i=0;i<16;i++){
+    const sp=document.createElement('div');
+    sp.className='sparkle';
+    sp.textContent=EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+    sp.style.cssText=`left:${20+Math.random()*60}vw;top:${30+Math.random()*40}vh;animation-duration:${.8+Math.random()*1}s;animation-delay:${Math.random()*.6}s`;
+    document.body.appendChild(sp);
+    setTimeout(()=>sp.remove(),2500);
+  }
+}
+
+
+/* =============================================
+   SHOW FORGIVENESS PAGE
+   ============================================= */
+function showForgiveness(){
+  burst();
+  const p1=document.getElementById('page1');
+  const p2=document.getElementById('page2');
+  const mad=document.getElementById('btn-mad');
+
+  // fade out page1
+  p1.style.transition='opacity .7s ease';
+  p1.style.opacity='0';
+
+  setTimeout(()=>{
+    p1.style.display='none';
+    if(mad)mad.style.display='none';
+    p2.style.display='flex';
+    // scroll to top so page2 is visible
+    window.scrollTo({top:0,behavior:'instant'});
+    requestAnimationFrame(()=>requestAnimationFrame(()=>p2.classList.add('show')));
+    setTimeout(burst,900);
+  },700);
+}
+
+
+/* =============================================
+   WHATSAPP REDIRECT
+   ============================================= */
+function goToWhatsApp(){
+  const encoded=encodeURIComponent(WA_MESSAGE);
+  const url=`https://wa.me/${WA_NUMBER}?text=${encoded}`;
+  // burst for fun before redirect
+  burst();
+  setTimeout(()=>window.open(url,'_blank'),600);
+}
+</script>
+</body>
+</html>
